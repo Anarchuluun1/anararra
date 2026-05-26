@@ -1,0 +1,30 @@
+function moveBtn() {
+  attempts++;
+  // "Тийм" товчийг идэвхгүй болгоно
+  yesBtn.disabled = true;
+
+  const container = noBtn.parentElement;
+  const rect = container.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+  const maxX = rect.width - btnRect.width - 20;
+  const maxY = rect.height - btnRect.height - 20;
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+  msg.textContent = messages[Math.min(attempts - 1, messages.length - 1)];
+}
+
+function handleYes() {
+  // "Үгүй" товчийг идэвхгүй болгоно
+  noBtn.disabled = true;
+
+  spawnEmojis();
+  document.getElementById('main').innerHTML = `
+    <div style="display:flex; flex-direction:column; align-items:center; gap:1rem; padding:3rem 1rem;">
+      <div style="font-size:48px;">🍺</div>
+      <h2 style="font-size:22px; font-weight:500; color:#fff; text-align:center;">Эртхэн ингээл дарчихгүй</h2>
+      <p style="font-size:16px; color:#aaa; text-align:center;">Хаана, хэзээ вэ найз?</p>
+    </div>
+  `;
+}
